@@ -66,13 +66,8 @@ fn cmp_digit_str(lhs: &str, rhs: &str) -> Ordering {
     let rhs = trim_leading_zeroes(rhs);
 
     match lhs.len().cmp(&rhs.len()) {
-        Ordering::Equal => {
-            lhs.chars()
-                .zip(rhs.chars())
-                .find(|&(a, b)| a != b)
-                .map_or(Ordering::Equal, |(a, b)| a.cmp(&b))
-        }
-        result @ _ => result,
+        Ordering::Equal => lhs.cmp(&rhs),
+        result @ _ => result
     }
 }
 
